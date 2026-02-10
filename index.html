@@ -98,7 +98,6 @@
     .yes {
       background-color: #ff4d6d;
       color: white;
-      z-index: 2;
     }
 
     .no {
@@ -151,6 +150,11 @@
 
 <body>
 
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="./Bee_Gees_-_More_Than_A_Woman_(Lyric_Video)_128k.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- INTRO GIF -->
   <div id="intro">
     <img src="./kb-roasted.gif" alt="intro gif">
@@ -170,6 +174,7 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const response = document.getElementById("response");
+    const bgMusic = document.getElementById("bgMusic");
 
     let yesClicks = 0;
 
@@ -182,6 +187,13 @@
       "Sharks existed before trees.",
       "Your brain uses about 20% of your energy."
     ];
+
+    bgMusic.volume = 0.6;
+    bgMusic.play().catch(() => {});
+
+    document.addEventListener("click", () => {
+      if (bgMusic.paused) bgMusic.play();
+    }, { once: true });
 
     setTimeout(() => {
       card.style.pointerEvents = "auto";
@@ -196,11 +208,10 @@
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < 90) {
-        const maxX = cardRect.width - btnRect.width;
-        const maxY = cardRect.height - btnRect.height;
-
-        noBtn.style.left = Math.random() * maxX + "px";
-        noBtn.style.top = Math.random() * maxY + "px";
+        noBtn.style.left =
+          Math.random() * (cardRect.width - btnRect.width) + "px";
+        noBtn.style.top =
+          Math.random() * (cardRect.height - btnRect.height) + "px";
       }
     });
 
@@ -234,9 +245,8 @@
           "Relax i know youre very eager to spend valentines with me.";
       }
       else {
-        const fact =
+        response.innerHTML =
           randomFacts[Math.floor(Math.random() * randomFacts.length)];
-        response.innerHTML = fact;
       }
     });
   </script>
