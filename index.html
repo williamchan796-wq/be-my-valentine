@@ -29,6 +29,36 @@
       z-index: 0;
     }
 
+    /* SIKE overlay */
+    #sike {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 10px;
+      text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.2);
+      z-index: 5;
+      animation: sikeFade 3s forwards;
+    }
+
+    @keyframes sikeFade {
+      0% {
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
     .card {
       width: 600px;
       height: 412px;
@@ -49,6 +79,8 @@
       align-items: center;
       justify-content: space-between;
       text-align: center;
+
+      pointer-events: none; /* disabled until SIKE finishes */
     }
 
     h1 {
@@ -99,7 +131,7 @@
       }
     }
 
-    /* GIF styling (centered vertically) */
+    /* GIF styling */
     .valentine-gif {
       position: absolute;
       top: 50%;
@@ -128,6 +160,10 @@
 </head>
 
 <body>
+
+  <!-- SIKE INTRO -->
+  <div id="sike">SIKE</div>
+
   <div class="card" id="card">
     <h1>Renee, will YOU be my Valentine? 💖</h1>
 
@@ -145,7 +181,12 @@
 
     let yesClicks = 0;
 
-    // Make the "No" button dodge the mouse
+    // Enable card after SIKE fades
+    setTimeout(() => {
+      card.style.pointerEvents = "auto";
+    }, 3000);
+
+    // Dodge NO button
     card.addEventListener("mousemove", (e) => {
       const cardRect = card.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
@@ -163,7 +204,7 @@
       }
     });
 
-    // Yes button logic
+    // YES button logic
     yesBtn.addEventListener("click", () => {
       yesClicks++;
 
@@ -174,7 +215,6 @@
         noBtn.style.display = "none";
         yesBtn.classList.add("pulse");
 
-        // Add GIFs (left and right)
         const gifLeft = document.createElement("img");
         gifLeft.src = "./stan-twt-funny.gif";
         gifLeft.className = "valentine-gif gif-left";
