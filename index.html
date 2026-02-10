@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine?</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+
+      background-image: url("./cat.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 0;
+    }
+
+    .card {
+      width: 600px;
+      height: 412px;
+      padding: 40px;
+
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+      z-index: 2;
+    }
+
+    .no {
+      background-color: #ddd;
+      position: absolute;
+      left: 450px;
+      top: 255px;
+    }
+
+    /* Pulse animation */
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7);
+      }
+      70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 18px rgba(255, 77, 109, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0);
+      }
+    }
+
+    /* GIF styling */
+    .valentine-gif {
+      position: absolute;
+      bottom: 90px;
+      width: 110px;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .gif-left {
+      left: 25px;
+    }
+
+    .gif-right {
+      right: 25px;
+    }
+
+    #response {
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card" id="card">
+    <h1>Renee, will YOU be my Valentine? 💖</h1>
+
+    <button class="yes" id="yesBtn">Yes</button>
+    <button class="no" id="noBtn">NO you stink!</button>
+
+    <p id="response"></p>
+  </div>
+
+  <script>
+    const card = document.getElementById("card");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const response = document.getElementById("response");
+
+    let yesClicks = 0;
+
+    card.addEventListener("mousemove", (e) => {
+      const cardRect = card.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const dx = e.clientX - (btnRect.left + btnRect.width / 2);
+      const dy = e.clientY - (btnRect.top + btnRect.height / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 90) {
+        const maxX = cardRect.width - btnRect.width;
+        const maxY = cardRect.height - btnRect.height;
+
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      yesClicks++;
+
+      if (yesClicks === 1) {
+        response.innerHTML =
+          "Perfect! It's a date. Me. You. Dinner. 4pm. After that, COCKtails 6:45. After that let's get NASTY.";
+
+        noBtn.style.display = "none";
+        yesBtn.classList.add("pulse");
+
+        // LEFT GIF
+        const gifLeft = document.createElement("img");
+        gifLeft.src = "./stan-twt-funny.gif";
+        gifLeft.className = "valentine-gif gif-left";
+
+        // RIGHT GIF
+        const gifRight = document.createElement("img");
+        gifRight.src = "./stan-twt-funny.gif";
+        gifRight.className = "valentine-gif gif-right";
+
+        card.appendChild(gifLeft);
+        card.appendChild(gifRight);
+      } 
+      else if (yesClicks === 2) {
+        response.innerHTML =
+          "I knew you were gonna click yes again, but that is all.";
+      } 
+      else if (yesClicks === 3) {
+        response.innerHTML =
+          "Relax i know youre very eager to spend valentines with me.";
+      }
+    });
+  </script>
+</body>
+</html>
