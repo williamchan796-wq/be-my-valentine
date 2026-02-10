@@ -99,10 +99,11 @@
       }
     }
 
-    /* GIF styling */
+    /* GIF styling (centered vertically) */
     .valentine-gif {
       position: absolute;
-      bottom: 90px;
+      top: 50%;
+      transform: translateY(-50%);
       width: 110px;
       border-radius: 12px;
       pointer-events: none;
@@ -144,6 +145,7 @@
 
     let yesClicks = 0;
 
+    // Make the "No" button dodge the mouse
     card.addEventListener("mousemove", (e) => {
       const cardRect = card.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
@@ -161,6 +163,7 @@
       }
     });
 
+    // Yes button logic
     yesBtn.addEventListener("click", () => {
       yesClicks++;
 
@@ -171,12 +174,11 @@
         noBtn.style.display = "none";
         yesBtn.classList.add("pulse");
 
-        // LEFT GIF
+        // Add GIFs (left and right)
         const gifLeft = document.createElement("img");
         gifLeft.src = "./stan-twt-funny.gif";
         gifLeft.className = "valentine-gif gif-left";
 
-        // RIGHT GIF
         const gifRight = document.createElement("img");
         gifRight.src = "./stan-twt-funny.gif";
         gifRight.className = "valentine-gif gif-right";
