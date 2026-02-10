@@ -47,12 +47,8 @@
     }
 
     @keyframes sikeFade {
-      0% {
-        opacity: 1;
-      }
-      70% {
-        opacity: 1;
-      }
+      0% { opacity: 1; }
+      70% { opacity: 1; }
       100% {
         opacity: 0;
         pointer-events: none;
@@ -66,7 +62,6 @@
 
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
 
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -80,7 +75,7 @@
       justify-content: space-between;
       text-align: center;
 
-      pointer-events: none; /* disabled until SIKE finishes */
+      pointer-events: none;
     }
 
     h1 {
@@ -111,7 +106,6 @@
       top: 255px;
     }
 
-    /* Pulse animation */
     .pulse {
       animation: pulse 1.5s infinite;
     }
@@ -131,7 +125,6 @@
       }
     }
 
-    /* GIF styling */
     .valentine-gif {
       position: absolute;
       top: 50%;
@@ -141,13 +134,8 @@
       pointer-events: none;
     }
 
-    .gif-left {
-      left: 25px;
-    }
-
-    .gif-right {
-      right: 25px;
-    }
+    .gif-left { left: 25px; }
+    .gif-right { right: 25px; }
 
     #response {
       font-size: 18px;
@@ -161,7 +149,6 @@
 
 <body>
 
-  <!-- SIKE INTRO -->
   <div id="sike">SIKE</div>
 
   <div class="card" id="card">
@@ -181,12 +168,22 @@
 
     let yesClicks = 0;
 
-    // Enable card after SIKE fades
+    const randomFacts = [
+      "Octopuses have three hearts and blue blood.",
+      "Bananas are berries, but strawberries are not.",
+      "Wombat poop is cube-shaped.",
+      "Honey never spoils. Archaeologists have eaten 3,000-year-old honey.",
+      "There are more trees on Earth than stars in the Milky Way.",
+      "A day on Venus is longer than a year on Venus.",
+      "Sharks existed before trees.",
+      "Your brain burns about 20% of your body's energy.",
+      "Scotland has 421 words for snow."
+    ];
+
     setTimeout(() => {
       card.style.pointerEvents = "auto";
     }, 3000);
 
-    // Dodge NO button
     card.addEventListener("mousemove", (e) => {
       const cardRect = card.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
@@ -204,7 +201,6 @@
       }
     });
 
-    // YES button logic
     yesBtn.addEventListener("click", () => {
       yesClicks++;
 
@@ -233,6 +229,11 @@
       else if (yesClicks === 3) {
         response.innerHTML =
           "Relax i know youre very eager to spend valentines with me.";
+      } 
+      else {
+        const fact =
+          randomFacts[Math.floor(Math.random() * randomFacts.length)];
+        response.innerHTML = "Random fact: " + fact;
       }
     });
   </script>
