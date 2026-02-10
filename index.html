@@ -11,7 +11,8 @@
       margin: 0;
       overflow: hidden;
 
-      background-image: url("./cat.png");
+      /* NEW GIF BACKGROUND */
+      background-image: url("./giphy-downsized-medium.gif");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -62,6 +63,7 @@
 
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
 
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -172,12 +174,10 @@
       "Octopuses have three hearts and blue blood.",
       "Bananas are berries, but strawberries are not.",
       "Wombat poop is cube-shaped.",
-      "Honey never spoils. Archaeologists have eaten 3,000-year-old honey.",
-      "There are more trees on Earth than stars in the Milky Way.",
+      "Honey never spoils.",
       "A day on Venus is longer than a year on Venus.",
       "Sharks existed before trees.",
-      "Your brain burns about 20% of your body's energy.",
-      "Scotland has 421 words for snow."
+      "Your brain uses about 20% of your energy."
     ];
 
     setTimeout(() => {
@@ -206,7 +206,7 @@
 
       if (yesClicks === 1) {
         response.innerHTML =
-          "WHATTTT I get to spend valentines day with RENEE?!?! Me. You. Dinner. 4pm. After that, COCKtails 6:45. After that let's get NASTY.";
+          "Perfect! It's a date. Me. You. Dinner. 4pm. After that, COCKtails 6:45. After that let's get NASTY.";
 
         noBtn.style.display = "none";
         yesBtn.classList.add("pulse");
@@ -221,15 +221,15 @@
 
         card.appendChild(gifLeft);
         card.appendChild(gifRight);
-      } 
+      }
       else if (yesClicks === 2) {
         response.innerHTML =
           "I knew you were gonna click yes again, but that is all.";
-      } 
+      }
       else if (yesClicks === 3) {
         response.innerHTML =
           "Relax i know youre very eager to spend valentines with me.";
-      } 
+      }
       else {
         const fact =
           randomFacts[Math.floor(Math.random() * randomFacts.length)];
